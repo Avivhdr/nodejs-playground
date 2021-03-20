@@ -1,0 +1,31 @@
+POST http://localhost:9999/auth/register HTTP/1.1
+content-type: application/json
+
+{
+  "username": "aviv12",
+  "email": "aviv@gmail.com",
+  "password": "1234567890"
+}
+###
+POST http://localhost:9999/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "aviv@gmail.com",
+  "password": "1234567890"
+}
+
+###
+GET http://localhost:9999/posts
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTRkYWFhMjIwMWRmMDEzNGE4ODI2NSIsImlhdCI6MTYxNjE4MjgzM30.2XTDS1mJm8t9M36mu7L0iJDe9746xh0IFr6cYeq443c
+###
+
+POST http://localhost:9999/posts HTTP/1.1
+content-type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTRkYWFhMjIwMWRmMDEzNGE4ODI2NSIsImlhdCI6MTYxNjE4MjgzM30.2XTDS1mJm8t9M36mu7L0iJDe9746xh0IFr6cYeq443c
+
+{
+  "title": "Aviv",
+  "description": "This is a description"
+}
+###

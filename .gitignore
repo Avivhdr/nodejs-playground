@@ -1,0 +1,3 @@
+node_modules/
+devtmpnodejsnpm-cache/
+.env
