@@ -1,28 +1,22 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-  username: {
+const PostSchema = new mongoose.Schema({
+  title: {
     type: String,
     required: true,
     min: 6,
     max: 256,
     unique: true,
   },
-  email: {
+  description: {
     type: String,
     required: true,
     min: 6,
-    max: 256,
-  },
-  password: {
-    type: String,
-    required: true,
-    min: 6,
-    max: 1024,
+    // max: 256,
   },
 },
 /* { collection: 'users' } */
 // eslint-disable-next-line function-paren-newline
 );
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Post', PostSchema);
