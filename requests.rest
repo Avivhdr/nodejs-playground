@@ -1,8 +1,8 @@
+
 POST http://localhost:9999/auth/register HTTP/1.1
 content-type: application/json
 
 {
-  "username": "aviv12",
   "email": "aviv@gmail.com",
   "password": "1234567890"
 }
@@ -14,6 +14,9 @@ content-type: application/json
   "email": "aviv@gmail.com",
   "password": "1234567890"
 }
+
+###
+GET http://localhost:9999/login
 
 ###
 GET http://localhost:9999/posts

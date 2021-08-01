@@ -22,7 +22,7 @@ const validateUserDetails = (data) => {
 
 const validateLoginDetails = (data) => {
   const schema = Joi.object({
-    username: Joi
+    email: Joi
       .string()
       .min(6)
       .required()

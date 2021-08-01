@@ -8,9 +8,9 @@ const dbConnect = () => {
     useCreateIndex: true,
   });
 
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', () => console.log('Connected to DB'));
+  const { connection } = mongoose;
+  connection.on('error', console.error.bind(console, 'connection error:'));
+  connection.once('open', () => console.log('Connected to DB'));
 };
 
 module.exports = dbConnect;

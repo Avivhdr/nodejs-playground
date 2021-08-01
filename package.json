@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index"
+    "start index": "nodemon index",
+    "start app": "nodemon app.js"
   },
   "dependencies": {
     "@babel/cli": "^7.12.10",
@@ -21,7 +22,15 @@
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
-    "nodemon": "^2.0.6"
+    "express-flash": "^0.0.2",
+    "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.10",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^7.22.0",

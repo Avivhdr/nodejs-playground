@@ -1,17 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const User = require('../../model/user');
+const passport = require('passport');
 
+const User = require('../../model/user');
+const { forwardAuthenticated } = require('../../config/auth');
 const { validateLoginDetails, validateUserDetails } = require('./validations.js');
 const { getTokenByUserId } = require('../verifyToken');
 
 router.post('/register', async (req, res) => {
-  const {
-    // username,
-    email,
-    password: plainTextPassword,
-  } = req.body;
+  const { email, password: plainTextPassword } = req.body;
 
   const { error } = validateUserDetails(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -19,48 +17,42 @@ router.post('/register', async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(plainTextPassword, salt);
 
-  const emailExist = await User.findOne({ email });
+  const emailExist = await User.findOne({ email }).lean();
   if (emailExist) return res.status(400).send('email already exist');
 
   try {
     const response = await User.create({
-      // username,
       email,
       password,
     });
-    const token = getTokenByUserId(response._id);
+    // const token = getTokenByUserId(response._id);
     res
-      .header('auth-token', token)
-      .json({ user_id: response._id });
+      .redirect('/auth/login');
+    // .header('auth-token', token)
+    // .json({ user_id: response._id })
   } catch (err) {
     if (err.code === 11000) {
       return res
         .status(400)
-        .send('Username already in use');
+        .send('Email already exist in DB');
     }
     throw new Error(err);
   }
 });
 
-router.post('/login/', async (req, res) => {
-  debugger; // eslint-disable-line 
-
-  const { email, password } = req.body;
-  const { error } = validateLoginDetails(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  const user = await User.findOne({ email }).lean();
-  if (!user) return res.status(400).json('Email Does not exist');
-
-  const IsPasswordValid = await bcrypt.compare(password, user.password);
-  if (!IsPasswordValid) return res.status(400).json('Wrong Password!');
-
-  const token = getTokenByUserId(user._id);
-  return res
-    .header('auth-token', token)
-    .redirect('/')
-    .send('Logged in!');
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+    failureFlash: true,
+  })(req, res, next);
 });
+
+// router.post('/login/', passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/login',
+//   failureFlash: true,
+// }));
 
 module.exports = router;
 
