@@ -4,17 +4,24 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "s": "nodemon index"
+    "start": "nodemon index"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "axios": "^0.21.1",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-lodash": "^3.3.4",
     "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
+    "core-js": "^3.8.1",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
-    "joi": "^17.4.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.10",
-    "nodemon": "^2.0.7"
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.6"
   },
   "devDependencies": {
     "eslint": "^7.22.0",
