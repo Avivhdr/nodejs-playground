@@ -3,14 +3,14 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../model/user');
 
-const { validateLogin, validateUser } = require('./validations.js');
+const { validateLoginDetails, validateUserDetails } = require('./validations.js');
 const { getTokenByUserId } = require('../verifyToken');
 
 // eslint-disable-next-line consistent-return
 router.post('/register', async (req, res) => {
   const { username, email, password: plainTextPassword } = req.body;
 
-  const { error } = validateUser(req.body);
+  const { error } = validateUserDetails(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const salt = await bcrypt.genSalt(10);
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login/', async (req, res) => {
   const { email, password } = req.body;
-  const { error } = validateLogin(req.body);
+  const { error } = validateLoginDetails(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findOne({ email }).lean();

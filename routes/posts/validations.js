@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validatePost = (data) => {
+const validatePostDetails = (data) => {
   const schema = Joi
     .object({
       title: Joi
@@ -17,5 +17,5 @@ const validatePost = (data) => {
 };
 
 module.exports = {
-  validatePost,
+  validatePostDetails,
 };

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Post = require('../../model/post');
 const { verifyToken } = require('../verifyToken');
-const { validatePost } = require('./validations');
+const { validatePostDetails } = require('./validations');
 
 router.use('/', verifyToken);
 
@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { error } = validatePost(req.body);
+  const { error } = validatePostDetails(req.body);
   if (error) return res.status(400).send(error.message);
 
   Post.create(req.body);

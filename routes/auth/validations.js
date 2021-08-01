@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validateUser = (data) => {
+const validateUserDetails = (data) => {
   const schema = Joi
     .object({
       username: Joi
@@ -20,7 +20,7 @@ const validateUser = (data) => {
   return schema.validate(data);
 };
 
-const validateLogin = (data) => {
+const validateLoginDetails = (data) => {
   const schema = Joi.object({
     email: Joi
       .string()
@@ -36,6 +36,6 @@ const validateLogin = (data) => {
 };
 
 module.exports = {
-  validateUser,
-  validateLogin,
+  validateUserDetails,
+  validateLoginDetails,
 };
